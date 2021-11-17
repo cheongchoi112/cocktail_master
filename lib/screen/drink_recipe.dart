@@ -1,4 +1,4 @@
-import 'package:cocktail_master/models/cocktail.dart';
+import 'package:cocktail_master/models/drink.dart';
 import 'package:flutter/material.dart';
 
 class DrinkRecipe extends StatelessWidget {

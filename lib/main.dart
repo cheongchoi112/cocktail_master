@@ -9,12 +9,15 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String appName = 'Margarita Master';
+
     return MaterialApp(
-      title: 'Margarita Master',
+      title: appName,
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
       ),
-      home: ChooseDrinkType(title: 'Margarita Master'),
+      home: DrinkType(title: appName),
+      debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
     );
   }

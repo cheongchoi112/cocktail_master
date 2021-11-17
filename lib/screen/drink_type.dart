@@ -1,28 +1,29 @@
 import 'dart:convert';
 
-import 'package:cocktail_master/models/cocktail.dart';
+import 'package:cocktail_master/models/drink.dart';
 import 'package:cocktail_master/services/drink_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'drink_list.dart';
 
-class ChooseDrinkType extends StatefulWidget {
-  ChooseDrinkType({required this.title});
+class DrinkType extends StatefulWidget {
+  DrinkType({required this.title});
 
   final String title;
 
   @override
-  _ChooseDrinkTypeState createState() => _ChooseDrinkTypeState();
+  _DrinkTypeState createState() => _DrinkTypeState();
 }
 
-class _ChooseDrinkTypeState extends State<ChooseDrinkType> {
+class _DrinkTypeState extends State<DrinkType> {
   var margarita;
   var martini;
   var mojito;
 
   @override
   void initState() {
+    EasyLoading.instance..userInteractions = false;
     EasyLoading.show(status: 'loading...');
 
     getDrinks("margarita").then((value) {
@@ -31,31 +32,39 @@ class _ChooseDrinkTypeState extends State<ChooseDrinkType> {
       margarita = List<Drink>.from(margaritaMap.map((value) {
         return Drink.fromJson(value);
       }));
-    }).whenComplete(() => {EasyLoading.dismiss()});
+    });
 
     getDrinks("martini").then((value) {
-      List<dynamic> margaritaMap = jsonDecode(value)['drinks'];
+      List<dynamic> martiniMap = jsonDecode(value)['drinks'];
 
-      martini = List<Drink>.from(margaritaMap.map((value) {
+      martini = List<Drink>.from(martiniMap.map((value) {
+        return Drink.fromJson(value);
+      }));
+    });
+
+    getDrinks("mojito").then((value) {
+      List<dynamic> mojitoMap = jsonDecode(value)['drinks'];
+
+      mojito = List<Drink>.from(mojitoMap.map((value) {
         return Drink.fromJson(value);
       }));
     }).whenComplete(() => {EasyLoading.dismiss()});
 
-    getDrinks("Mojito").then((value) {
-      List<dynamic> margaritaMap = jsonDecode(value)['drinks'];
-
-      mojito = List<Drink>.from(margaritaMap.map((value) {
-        return Drink.fromJson(value);
-      }));
-    }).whenComplete(() => {EasyLoading.dismiss()});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    void buttonOnClick(drinks, drinkType) {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (BuildContext context) {
+        return DrinkList(drinks, drinkType);
+      }));
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Margarita'),
+        title: Text(widget.title),
       ),
       body: Center(
         child: Column(
@@ -87,11 +96,5 @@ class _ChooseDrinkTypeState extends State<ChooseDrinkType> {
         ),
       ),
     );
-  }
-
-  void buttonOnClick(drinks, drinkType) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return DrinkList(drinks, drinkType);
-    }));
   }
 }
