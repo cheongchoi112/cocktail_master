@@ -1,4 +1,4 @@
-import 'package:cocktail_master/screen/drink_type.dart';
+import 'package:cocktail_master/screens/drink_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 

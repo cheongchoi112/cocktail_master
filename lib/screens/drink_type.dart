@@ -17,9 +17,7 @@ class DrinkType extends StatefulWidget {
 }
 
 class _DrinkTypeState extends State<DrinkType> {
-  var margarita;
-  var martini;
-  var mojito;
+  var margarita, martini, mojito;
 
   @override
   void initState() {
@@ -63,37 +61,42 @@ class _DrinkTypeState extends State<DrinkType> {
     }
 
     return Scaffold(
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            children: [Text('item 1')],
+          ),
+        ),
+      ),
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () => buttonOnClick(margarita, 'Margarita'),
-                child: Text("Margarita"),
-                style: ElevatedButton.styleFrom(primary: Colors.redAccent),
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () => buttonOnClick(margarita, 'Margarita'),
+              child: Text("Margarita"),
+              style: ElevatedButton.styleFrom(primary: Colors.redAccent),
             ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () => buttonOnClick(martini, 'Martini'),
-                child: Text("Martini"),
-                style: ElevatedButton.styleFrom(primary: Colors.amber),
-              ),
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () => buttonOnClick(martini, 'Martini'),
+              child: Text("Martini"),
+              style: ElevatedButton.styleFrom(primary: Colors.amber),
             ),
-            Expanded(
-              child: ElevatedButton(
-                onPressed: () => buttonOnClick(mojito, 'Mojito'),
-                child: Text("Mojito"),
-                style: ElevatedButton.styleFrom(primary: Colors.green),
-              ),
+          ),
+          Expanded(
+            child: ElevatedButton(
+              onPressed: () => buttonOnClick(mojito, 'Mojito'),
+              child: Text("Mojito"),
+              style: ElevatedButton.styleFrom(primary: Colors.green),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

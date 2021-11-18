@@ -1,5 +1,5 @@
 import 'package:cocktail_master/models/drink.dart';
-import 'package:cocktail_master/screen/drink_recipe.dart';
+import 'package:cocktail_master/screens/drink_recipe.dart';
 import 'package:flutter/material.dart';
 
 class ImageButton extends StatelessWidget {
